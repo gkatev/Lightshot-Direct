@@ -1,32 +1,29 @@
+#NoTrayIcon
 #include <MsgBoxConstants.au3>
 
 local $screen_delay = 60000
 local $lightshot_path = "C:\Program Files (x86)\Skillbrains\lightshot\Lightshot.exe"
 
-local $running = 0
+HotKeySet("{PRINTSCREEN}", take_screen)
 
-HotkeySet("{PRINTSCREEN}", run_lightshot)
+check_lightshot()
 
 while(1)
-	if(not $running and ProcessExists("lightshot.exe")) then
-		kill_lightshot()
-	endif
-
 	Sleep(1000)
 wend
 
-func run_lightshot()
-	HotKeySet("{PRINTSCREEN}")
+func take_screen()
+	check_lightshot()
 	
-	ShellExecute('"' & $lightshot_path & '"')
-	$running = 1
-	
-	Sleep(200)
-	Send("{PRINTSCREEN}")
+	Send("^{PRINTSCREEN}")
 	wait_screen()
-	
-	kill_lightshot()
-	HotkeySet("{PRINTSCREEN}", run_lightshot)
+endfunc
+
+func check_lightshot()
+	if(not ProcessExists("lightshot.exe")) then 
+		ShellExecute('"' & $lightshot_path & '"')
+		Sleep(200)
+	endif
 endfunc
 
 func wait_screen()
@@ -38,7 +35,6 @@ func wait_screen()
 		
 		if($clip <> $start_clip and StringInStr($clip, "http://prntscr.com/")) then
 			local $buf
-			ClipPut("")
 			local $r = DllCall("analyze.dll", "int", "analyze_result", "str", $clip, "str", $buf, "int", 65536)
 			
 			if(@error) then
@@ -54,13 +50,6 @@ func wait_screen()
 			exitloop
 		endif
 		
-		$last_clip = $clip
-		Sleep(100)
+		Sleep(50)
 	wend
-endfunc
-
-func kill_lightshot()
-	ProcessClose("lightshot.exe")
-	Run("run_silent cleanup_tray")
-	$running = 0
 endfunc

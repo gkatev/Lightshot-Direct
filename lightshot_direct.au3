@@ -17,11 +17,8 @@
 #NoTrayIcon
 #include <MsgBoxConstants.au3>
 
-local $debug_mode = 0
 local $screen_delay = 60000
 local $lightshot_path = "C:\Program Files (x86)\Skillbrains\lightshot\Lightshot.exe"
-
-if($CmdLine[0] == 1 and ($CmdLine[1] == "-d" or $CmdLine[1] == "--debug")) $debug_mdoe = 1
 
 HotKeySet("{PRINTSCREEN}", take_screen)
 

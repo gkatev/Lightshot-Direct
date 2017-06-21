@@ -17,8 +17,11 @@
 #NoTrayIcon
 #include <MsgBoxConstants.au3>
 
+local $debug_mode = 0
 local $screen_delay = 60000
 local $lightshot_path = "C:\Program Files (x86)\Skillbrains\lightshot\Lightshot.exe"
+
+if($CmdLine[0] == 1 and ($CmdLine[1] == "-d" or $CmdLine[1] == "--debug")) $debug_mdoe = 1
 
 HotKeySet("{PRINTSCREEN}", take_screen)
 
@@ -61,7 +64,7 @@ func wait_screen()
 				if($r[0] == 0) then 
 					ClipPut($r[2])
 				else 
-					MsgBox($MB_ICONERROR, "Lightshot Direct", "String Analyzer for '" & $clip & "' failed with error code " & $r[0])
+					MsgBox($MB_ICONERROR, "Lightshot Direct", "String Analyzer failed for '" & $clip & "' with error code " & $r[0])
 				endif
 			endif
 			

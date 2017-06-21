@@ -50,6 +50,8 @@ func wait_screen()
 		local $clip = ClipGet()
 		
 		if($clip <> $start_clip and StringInStr($clip, "http://prntscr.com/")) then
+			ClipPut("")
+			
 			local $buf
 			local $r = DllCall("analyze.dll", "int", "analyze_result", "str", $clip, "str", $buf, "int", 65536)
 			

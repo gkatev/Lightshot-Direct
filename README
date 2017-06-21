@@ -1,0 +1,12 @@
+Lightshot Direct is a simple script written in AutoIt to aid the use of the Lightshot program. 
+It runs in parallel to the lightshot program and when image of the screen has been shot it parses the result link and gets the direct link to the image. 
+In order for the script to work you will need to set lightshot to use the key Ctrl+PrtScrn to take screenshots(or feel free to change this in lightshot_direct.au3). 
+There needs to be a key combination that activates the script. By default, PrtScrn activates the script. 
+When the script is activated it sends the key combination so that lightshot may be activated.
+For the script to work you need to copy the image url to the clipboard. 
+This may be done easily by enabling the auto-copy feature of lightshot.
+The script listens for changes in the clipboard for 60 seconds after the combination was sent.
+When change is detected, the dll created by analyze.cpp is called to retreive the direct link to the image.
+
+Compilation:
+You will need autoit(aut2exe specifically) and libcurl(for analyze.cpp)

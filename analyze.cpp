@@ -62,4 +62,4 @@ extern "C" __declspec(dllexport) int __stdcall analyze_result(const char *link, 
 	
 	return 0;
 }
- */
+*/

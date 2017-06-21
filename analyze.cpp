@@ -1,10 +1,23 @@
+/* 	Copyright (C) 2017 Georgios Katevainis-Bitzos
+
+	This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+
 // g++ -c -DBUILDING_ANALYZE_PAGE_DELL analyze.cpp
 // g++ -shared -o analyze.dll analyze.o -lcurldll
 
-#include <iostream>
 #include <string>
 #include <regex>
-#include <assert.h>
 #include <curl/curl.h>
 
 using namespace std;
@@ -30,16 +43,13 @@ extern "C" __declspec(dllexport) int __stdcall analyze_result(const char *link, 
 	CURLcode res = curl_easy_perform(curl);
 	curl_easy_cleanup(curl);
 
-	if(res != CURLE_OK) {
-		fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-		return 2;
-	}
+	if(res != CURLE_OK) return 2;
 	
-	regex direct("\\\"(https:\\/\\/image\\.prntscr\\.com\\/image\\/\\w+\\.jpeg)\\\"");
+	regex direct("\\\"(https:\\/\\/image\\.prntscr\\.com\\/image\\/[\\w\\-]+\\.jpeg)\\\"");
 	smatch matches;
 	
 	if(regex_search(page_data, matches, direct)) {
-		assert(matches.size() == 2);
+		if(matches.size() != 2) return 3;
 		
 		size_t i;
 		for(i = 0; i < matches[1].str().length() && i < size - 1; i++) {
@@ -47,19 +57,7 @@ extern "C" __declspec(dllexport) int __stdcall analyze_result(const char *link, 
 		}
 		
 		buf[i] = '\0';
-	} else return 3;
+	} else return 4;
 	
 	return 0;
 }
-
-/* int main(int argc, char **argv) {
-	if(argc != 2) return 1;
-	string url = argv[1];	
-	
-	char buf[1024];
-	analyze_result(url.c_str(), buf, 1024);
-	cout << buf << endl;
-	
-	return 0;
-}
-*/

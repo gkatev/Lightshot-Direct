@@ -1,3 +1,19 @@
+#cs Copyright (C) 2017 Georgios Katevainis-Bitzos
+
+	This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+#ce
+
 #NoTrayIcon
 #include <MsgBoxConstants.au3>
 
@@ -43,7 +59,7 @@ func wait_screen()
 				if($r[0] == 0) then 
 					ClipPut($r[2])
 				else 
-					MsgBox($MB_ICONERROR, "Lightshot Direct", "String Analyzer failed with error code " & $r[0])
+					MsgBox($MB_ICONERROR, "Lightshot Direct", "String Analyzer for '" & $clip & "' failed with error code " & $r[0])
 				endif
 			endif
 			

@@ -1,6 +1,7 @@
 Lightshot Direct is a simple script written in AutoIt to aid the use of the Lightshot program. 
 It runs in parallel to the lightshot program and when an image of the screen has been shot it parses the result link and gets the direct link to the image. 
-In order for the script to work you will need to set up lightshot to use Ctrl+PrtScrn to take screenshots(or use another combination and alter the combination sent by the script -- in lightshot_direct.au3). 
+In order for the script to work you will need to set up lightshot to use Ctrl+PrtScrn to take screenshots
+	(or use another combination and alter the combination sent by the script -- in lightshot_direct.au3). 
 There needs to be a key combination that activates the script. By default, PrtScrn activates the script. 
 When the script is activated it sends the key combination so that lightshot may be activated.
 For the script to work you need to copy the image url to the clipboard. 

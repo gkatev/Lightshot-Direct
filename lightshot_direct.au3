@@ -17,6 +17,10 @@
 #NoTrayIcon
 #include <MsgBoxConstants.au3>
 
+if(ProcessList("lightshot_direct.exe")[0][0] <> 1) then 
+	Exit 
+endif
+
 local $screen_delay = 60000
 local $lightshot_path = "C:\Program Files (x86)\Skillbrains\lightshot\Lightshot.exe"
 

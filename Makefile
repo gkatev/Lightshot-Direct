@@ -1,4 +1,4 @@
-all: lightshot_direct.exe Makefile
+all: analyze.dll lightshot_direct.exe
 	
 analyze.dll: analyze.cpp Makefile
 	g++ -c -DBUILDING_ANALYZE_DLL analyze.cpp
@@ -7,4 +7,3 @@ analyze.dll: analyze.cpp Makefile
 	
 lightshot_direct.exe: lightshot_direct.au3 Makefile
 	autoc //in lightshot_direct.au3 //out lightshot_direct.exe
-	

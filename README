@@ -1,14 +1,23 @@
-Lightshot Direct is a simple script written in AutoIt to aid the use of the Lightshot program. 
-It runs in parallel to the lightshot program and when an image of the screen has been shot it parses the result link and gets the direct link to the image. 
-In order for the script to work you will need to set up lightshot to use Ctrl+PrtScrn to take screenshots
-	(or use another combination and alter the combination sent by the script -- in lightshot_direct.au3). 
-There needs to be a key combination that activates the script. By default, PrtScrn activates the script. 
-When the script is activated it sends the key combination so that lightshot may be activated.
-For the script to work you need to copy the image url to the clipboard. 
-This may be done easily by enabling the auto-copy feature of lightshot.
-The script listens for changes in the clipboard for 60 seconds after the combination was sent.
-When change is detected, the dll created by analyze.cpp is called to retreive the direct link to the image.
+Lightshot Direct is a simple script written in AutoIt to further improve the use of the lightshot program.
 
-Compilation:
-You will need autoit(aut2exe specifically) and libcurl(for analyze.cpp)
-Probably soon to be implemented using only autoit
+It runs parallel to it and when desired it signals lightshot to take an image and 
+	then monitors the clipboard for a set amount of time for the link to the image.
+	
+When detected, it analyzes the page and extracts the direct link to the image.
+
+You will probably need to adjust some settings: 
+	> The script and lightshot need to have a different activating key
+	  By default, the script registers the PrtScrn key and assumes lightshot to be using Ctrl + PrtScrn
+	  You may change this setting in lightshot_direct.au3 file.
+	  
+	> The script analyzes the result as soon as it is inserted into the clipboard
+	  For this to happen you need to either copy it manually or 
+		enable auto copying of the link in lightshot's settings.
+		
+	> The script by default listens for changes for 30 seconds. Configurable in lightshot_direct.au3.
+	
+	> The script attemps to auto-start lightshot when it detects that it's not running and you therefore
+	  need to the set the path to the lightshot executable/shortcut. Set to "" if this is not desired.
+	  
+The included makefile uses the aut2exe to produce an executable archive 
+	but you may simply run using the autoit vm. Keep in mind the script creates no tray icon.

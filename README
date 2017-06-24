@@ -19,5 +19,4 @@ You will probably need to adjust some settings:
 	> The script attemps to auto-start lightshot when it detects that it's not running and you therefore
 	  need to the set the path to the lightshot executable/shortcut. Set to "" if this is not desired.
 	  
-The included makefile uses the aut2exe to produce an executable archive 
-	but you may simply run using the autoit vm. Keep in mind the script creates no tray icon.
+The included makefile uses the aut2exe to produce an executable archive but you may simply run it directly from the autoit vm. Keep in mind the script creates no tray icon.

@@ -6,21 +6,24 @@ It runs parallel to it and when desired it signals lightshot to take an image an
 When detected, it analyzes the page and extracts the direct link to the image.
 
 You will probably need to adjust some settings: 
-	> The script and lightshot need to have a different activating key
-	  By default, the script registers the PrtScrn key and assumes lightshot to be using Ctrl + PrtScrn
-	  You may change this setting in lightshot_direct.au3.
-	  
-	> The script analyzes the result as soon as it is inserted into the clipboard
-	  For this to happen you need to either copy it manually or 
-		enable auto copying of the link in lightshot's settings.
-		
-	> The script by default listens for changes for 30 seconds. Configurable in lightshot_direct.au3.
-	
-	> After detecting the lightshot link, it erases the clipboard 
-		and pastes the direct link as soon as it is available.
-	
-	> The script attemps to auto-start lightshot when it detects that it's not running and you therefore
-	  need to the set the path to the lightshot executable/shortcut. Set to "" if this is not desired.
+
+The script and lightshot need to have a different activating key By default, the script 
+registers the PrtScrn key and assumes lightshot lightshot to be using Ctrl + PrtScrn. 
+You may change this setting in lightshot_direct.au3.
+
+The script analyzes the result as soon as it is inserted into the clipboard. 
+For this to happen you need to either copy it manually or enable auto copying of the link 
+in lightshot's settings.
+
+By default, the script listens to the clipboard for changes for a max of 30 seconds. 
+Configurable in lightshot_direct.au3.
+
+After detecting the lightshot link, it erases the clipboard and pastes the direct link 
+as soon as it is available.
+
+The script attemps to auto-start lightshot when it detects that it's not running and 
+you therefore need to provide it with the path to the lightshot executable/shortcut. 
+Set to "" to disable the behaviour.
 	  
 The included makefile uses the aut2exe to produce an executable archive but you may 
 simply run it directly from the autoit vm. Keep in mind the script creates no tray icon.
